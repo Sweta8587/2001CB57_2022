@@ -1,14 +1,7 @@
-def octact_identification(mod=5000):
-###Code
-
-
-from platform import python_version
-ver = python_version()
-
-if ver == "3.8.10":
-    print("Correct Version Installed")
-else:
-    print("Please install 3.8.10. Instruction are present in the GitHub Repo/Webmail. Url: https://pastebin.com/nvibxmjw")
-
-mod=5000
-octact_identification(mod)
+import csv
+with open('octant_input.csv', 'r') as file:
+    file = csv.reader(file)
+    with open('new_octant.csv', 'w')as csv_file:
+        csv_file = csv.writer(csv_file)
+        for line in file:
+            csv_file.writerow(line)
