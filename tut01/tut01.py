@@ -101,3 +101,19 @@ def octact_identification(mod=5000):
                 r2=[T[1], U[1], V[1], W[1], '','','',U_[1], V_[1], W_[1], get_octant(U_[1], V_[1], W_[1]), 'User Input','Mod '+str(mod)]
 
                 writer.writerow(r2)
+
+                # writing rows for each range consisting of octant frequencies 
+                c=0; j=2
+                for i in range(2,2+nr):
+                    t=[T[i], U[i], V[i], W[i], '','','',U_[j], V_[j], W_[j], get_octant(U_[j], V_[j], W_[j]),'']
+                    j+=1
+                    if(c<nr):
+                        if(c==nr-1):
+                            t.extend([str(c*mod+1)+' - '+str(n), f[c][1], f[c][-1], f[c][2], f[c][-2], f[c][3], f[c][-3], f[c][4], f[c][-4]])
+                        else:
+                            t.extend([str(c*mod)+' - '+str((c+1)*mod-1), f[c][1], f[c][-1], f[c][2], f[c][-2], f[c][3], f[c][-3], f[c][4], f[c][-4]])
+                        c+=1
+                    else:
+                        break
+
+                    writer.writerow(t)
