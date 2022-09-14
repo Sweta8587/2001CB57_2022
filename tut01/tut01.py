@@ -117,3 +117,21 @@ def octact_identification(mod=5000):
                         break
 
                     writer.writerow(t)
+
+                    # writing remaining rows; (2+nr) rows have been written upto here
+                for i in range(2+nr, n):
+                    t=[T[i], U[i], V[i], W[i], '','','',U_[j], V_[j], W_[j], get_octant(U_[j], V_[j], W_[j]),'']
+                    j+=1;
+                    writer.writerow(t)
+
+                # output file closed
+                Ofile.close()
+            
+            # input file closed
+            Ifile.close()
+
+    except:
+        print('File Not Found')
+
+mod=5000
+octact_identification(mod)
