@@ -34,8 +34,8 @@ def octact_identification(mod=5000):
     n=0  
 
     try:
-        with open('octant_input.csv', 'r') as inputfile:
-            freader=csv.reader(inputfile)
+        with open('octant_input.csv', 'r') as Ifile:
+            freader=csv.reader(Ifile)
 
             # now skipping the heading row
             next(freader)
@@ -68,4 +68,36 @@ def octact_identification(mod=5000):
                 z=W[i]-Wavg
                 W_.append(z)
 
-            nr=ceil(n/mod)        
+            nr=ceil(n/mod)     
+
+            # overall frequency of each octant
+            fo={1:0, -1:0, 2:0, -2:0, 3:0, -3:0, 4:0, -4:0}
+
+            # range wise frequency of each octant
+            f={}
+
+            for i in range (0,nr):
+                f[i]={1:0, -1:0, 2:0, -2:0, 3:0, -3:0, 4:0, -4:0}
+
+            for i in range (0,n):
+                r=int(i/mod)
+                o=get_octant(U_[i], V_[i], W_[i])
+                f[r][o]+=1
+                fo[o]+=1
+
+            with open('octant_output.csv', 'w', newline='') as Ofile:
+
+                # initialising field names
+                fn=['Time', 'U','V', 'W' ,'U Avg','V Avg','W Avg',"U'=U - U avg","V'=V - V avg","W'=W - W avg", "Octant"," ","Octant ID", "+1","-1","+2","-2","+3","-3","+4","-4"]
+
+                writer=csv.writer(Ofile)
+
+                writer.writerow(fn)
+
+                r1=[T[0], U[0], V[0], W[0], Uavg, Vavg, Wavg, U_[0], V_[0], W_[0], get_octant(U_[0], V_[0], W_[0]),'', 'Overall Count', fo[1], fo[-1], fo[2], fo[-2], fo[3], fo[-3], fo[4], fo[-4]]
+
+                writer.writerow(r1)
+
+                r2=[T[1], U[1], V[1], W[1], '','','',U_[1], V_[1], W_[1], get_octant(U_[1], V_[1], W_[1]), 'User Input','Mod '+str(mod)]
+
+                writer.writerow(r2)
