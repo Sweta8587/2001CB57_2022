@@ -7,7 +7,7 @@ try:
     from cmath import nan
     import openpyxl
 
-    wb = openpyxl.load_workbook(r'C:\Users\DELL\OneDrive\Desktop\temp_octant\input_octant_transition_identify - Copy.xlsx')
+    wb = openpyxl.load_workbook(r'C:\Users\ASUS\Documents\GitHub\2001CB57_2022\tut02\input_octant_transition_identify.xlsx')
 except:
     print("there is error in loading workbook check your file directory and import openpyxl")
     exit()
@@ -414,7 +414,7 @@ except:
 
 # saving workbook file
 try:
-    wb.save(r'C:\Users\DELL\OneDrive\Desktop\temp_octant\input_octant_transition_identify - Copy.xlsx')
+    wb.save(r'C:\Users\ASUS\Documents\GitHub\2001CB57_2022\tut02\input_octant_transition_identify.xlsx')
 except:
     print("there is error in saving excel file")
 
