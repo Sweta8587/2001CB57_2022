@@ -174,3 +174,62 @@ try:
 except:
     print("there is error in creating overall count value and verifing it")
     exit()
+
+
+# updating overall count and transition
+try:
+    lst_hh_val=[]
+    for j in range(t):
+        lst_hh_temp=[0,0,0,0,0,0,0,0]
+        if(j==t-1):
+            y=29745
+        else:
+            y=mod*(j+1)
+        for valu in range(mod*j,y):
+            if lst_octant[valu]==1:
+                lst_hh_temp[0]=lst_hh_temp[0]+1
+            if lst_octant[valu]==-1:
+                lst_hh_temp[1]=lst_hh_temp[1]+1
+            if lst_octant[valu]==2:
+                lst_hh_temp[2]=lst_hh_temp[2]+1
+            if lst_octant[valu]==-2:
+                lst_hh_temp[3]=lst_hh_temp[3]+1
+            if lst_octant[valu]==3:
+                lst_hh_temp[4]=lst_hh_temp[4]+1
+            if lst_octant[valu]==-3:
+                lst_hh_temp[5]=lst_hh_temp[5]+1
+            if lst_octant[valu]==4:
+                lst_hh_temp[6]=lst_hh_temp[6]+1
+            if lst_octant[valu]==-4:
+                lst_hh_temp[7]=lst_hh_temp[7]+1
+
+
+        lst_hh_val.append(lst_hh_temp)
+
+    lst_verified=[0,0,0,0,0,0,0,0]
+    for i in range(t):
+        for j in range(8):
+            lst_verified[j]=lst_verified[j]+lst_hh_val[i][j]
+
+    j=0
+    for row in sheet.iter_rows(min_row=4, min_col=13, max_row=t+4, max_col=13):
+        for cell in row:
+            cell.value=lst_hh[j]
+        j=j+1
+
+    i=0
+    for row in sheet.iter_rows(min_row=4, min_col=14, max_row=t+3, max_col=21):
+        j=0
+        for cell in row:
+            cell.value=lst_hh_val[i][j]
+            j=j+1
+        i=i+1
+
+    for row in sheet.iter_rows(min_row=t+4, min_col=14, max_row=t+4, max_col=21):
+        j=0
+        for cell in row:
+            cell.value=lst_verified[j]
+            j=j+1
+except:
+    print("there is error in updating in verified count")
+   
