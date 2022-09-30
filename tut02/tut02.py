@@ -233,3 +233,112 @@ try:
 except:
     print("there is error in updating in verified count")
    
+
+
+# creating list for mod transition value
+try:
+    lst_tran_count=[]
+
+    for i in range(t):
+        if(i==t-1):
+            y=29744
+        else:
+            y=mod*(i+1)-1
+        lst_tran_count_temp=[]
+        temp_1={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_11={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_2={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_22={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_3={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_33={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_4={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_44={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        for k in range(mod*i,y):
+
+            if(lst_octant[k]==1):
+                temp_1[lst_octant[k+1]]=temp_1[lst_octant[k+1]]+1
+            if(lst_octant[k]==-1):
+                temp_11[lst_octant[k+1]]=temp_11[lst_octant[k+1]]+1
+            if(lst_octant[k]==2):
+                temp_2[lst_octant[k+1]]=temp_2[lst_octant[k+1]]+1
+            if(lst_octant[k]==-2):
+                temp_22[lst_octant[k+1]]=temp_22[lst_octant[k+1]]+1
+            if(lst_octant[k]==3):
+                temp_3[lst_octant[k+1]]=temp_3[lst_octant[k+1]]+1
+            if(lst_octant[k]==-3):
+                temp_33[lst_octant[k+1]]=temp_33[lst_octant[k+1]]+1
+            if(lst_octant[k]==4):
+                temp_4[lst_octant[k+1]]=temp_4[lst_octant[k+1]]+1
+            if(lst_octant[k]==-4):
+                temp_44[lst_octant[k+1]]=temp_44[lst_octant[k+1]]+1
+        lst_tran_count_temp.append(temp_1)
+        lst_tran_count_temp.append(temp_11)
+        lst_tran_count_temp.append(temp_2)
+        lst_tran_count_temp.append(temp_22)
+        lst_tran_count_temp.append(temp_3)
+        lst_tran_count_temp.append(temp_33)
+        lst_tran_count_temp.append(temp_4)
+        lst_tran_count_temp.append(temp_44)
+        lst_tran_count.append(lst_tran_count_temp)
+        lst_tran_count_temp=[]
+        temp_1={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_11={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_2={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_22={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_3={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_33={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_4={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_44={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+
+    lst_tran_count1=[]
+
+    for i in range(t):
+
+        lst_tran_count_temp=[]
+        temp_1={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_11={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_2={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_22={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_3={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_33={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_4={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_44={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        for k in range(29744):
+
+            if(lst_octant[k]==1):
+                temp_1[lst_octant[k+1]]=temp_1[lst_octant[k+1]]+1
+            if(lst_octant[k]==-1):
+                temp_11[lst_octant[k+1]]=temp_11[lst_octant[k+1]]+1
+            if(lst_octant[k]==2):
+                temp_2[lst_octant[k+1]]=temp_2[lst_octant[k+1]]+1
+            if(lst_octant[k]==-2):
+                temp_22[lst_octant[k+1]]=temp_22[lst_octant[k+1]]+1
+            if(lst_octant[k]==3):
+                temp_3[lst_octant[k+1]]=temp_3[lst_octant[k+1]]+1
+            if(lst_octant[k]==-3):
+                temp_33[lst_octant[k+1]]=temp_33[lst_octant[k+1]]+1
+            if(lst_octant[k]==4):
+                temp_4[lst_octant[k+1]]=temp_4[lst_octant[k+1]]+1
+            if(lst_octant[k]==-4):
+                temp_44[lst_octant[k+1]]=temp_44[lst_octant[k+1]]+1
+        lst_tran_count_temp.append(temp_1)
+        lst_tran_count_temp.append(temp_11)
+        lst_tran_count_temp.append(temp_2)
+        lst_tran_count_temp.append(temp_22)
+        lst_tran_count_temp.append(temp_3)
+        lst_tran_count_temp.append(temp_33)
+        lst_tran_count_temp.append(temp_4)
+        lst_tran_count_temp.append(temp_44)
+        lst_tran_count1.append(lst_tran_count_temp)
+        lst_tran_count_temp=[]
+        temp_1={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_11={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_2={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_22={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_3={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_33={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_4={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        temp_44={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+except:
+    print("there is some error in creating list of mod transition value")
+
