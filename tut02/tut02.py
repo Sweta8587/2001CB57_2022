@@ -342,3 +342,79 @@ try:
 except:
     print("there is some error in creating list of mod transition value")
 
+
+
+# updating mod transition value
+try:
+    lst_skelton_1=[[nan,"Overall Transition Count",nan,nan,nan,nan,nan,nan,nan,nan],[nan,nan,"To",nan,nan,nan,nan,nan,nan,nan],[nan,"count","+1","-1","+2","-2","+3","-3","+4","-4"],["From","+1",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-1",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"+2",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-2",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"+3",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-3",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"+4",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-4",nan,nan,nan,nan,nan,nan,nan,nan]]
+    lst_skelton=[[nan,"Mod Transition count",nan,nan,nan,nan,nan,nan,nan,nan],[nan,nan,"To",nan,nan,nan,nan,nan,nan,nan],[nan,"count","+1","-1","+2","-2","+3","-3","+4","-4"],["From","+1",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-1",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"+2",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-2",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"+3",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-3",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"+4",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-4",nan,nan,nan,nan,nan,nan,nan,nan]]
+    i=0
+    zz=t+7
+    for row in sheet.iter_rows(min_row=zz, min_col=12, max_row=zz+10, max_col=21):
+        j=0
+        for cell in row:
+            cell.value=lst_skelton_1[i][j]
+            j=j+1
+        i=i+1
+    for h in range(1,t+1):
+        i=0
+        for row in sheet.iter_rows(min_row=13*h+zz, min_col=12, max_row=13*(h)+zz+10, max_col=21):
+            j=0
+            for cell in row:
+                cell.value=lst_skelton[i][j]
+                j=j+1
+            i=i+1
+
+    lst_tran_count_ans=[]
+    for lsss in lst_tran_count:
+        list_temp_1=[]
+        for lsss1 in lsss:
+            list_temp=[]
+            for x in lsss1:
+                list_temp.append(lsss1[x])
+            list_temp_1.append(list_temp)
+        lst_tran_count_ans.append(list_temp_1)
+    lst_tran_count_ans1=[]
+    for lsss in lst_tran_count1:
+        list_temp_1=[]
+        for lsss1 in lsss:
+            list_temp=[]
+            for x in lsss1:
+                list_temp.append(lsss1[x])
+            list_temp_1.append(list_temp)
+        lst_tran_count_ans1.append(list_temp_1)
+
+
+    for h in range(1,t+1):
+        i=0
+        for row in sheet.iter_rows(min_row=13*(h)+zz+3, min_col=14, max_row=13*(h)+zz+10, max_col=21):
+            j=0
+            for cell in row:
+                cell.value=lst_tran_count_ans[h-1][i][j]
+                j=j+1
+            i=i+1
+    i=0
+    for h in range(1,t+1):
+        for row in sheet.iter_rows(min_row=13*(h)+zz+1, min_col=13, max_row=13*(h)+zz+1, max_col=13):
+            for cell in row:
+                cell.value=lst_hh[i]    
+            i=i+1
+
+    i=0
+    for row in sheet.iter_rows(min_row=zz+3, min_col=14, max_row=zz+10, max_col=21):
+        j=0
+        for cell in row:
+            cell.value=lst_tran_count_ans1[0][i][j]
+            j=j+1
+        i=i+1
+except:
+    print("there is error in updating mod transition value in excel")
+
+
+
+# saving workbook file
+try:
+    wb.save(r'C:\Users\DELL\OneDrive\Desktop\temp_octant\input_octant_transition_identify - Copy.xlsx')
+except:
+    print("there is error in saving excel file")
+
