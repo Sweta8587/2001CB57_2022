@@ -23,7 +23,6 @@ def get_octant(x, y, z):
     else:
         return(-4)
 
-
 def octant_longest_subsequence_count():
     # processed values (to be used in program)
     ud, vd, wd, ov=[], [], [], []
@@ -61,7 +60,7 @@ def octant_longest_subsequence_count():
 
         for i in range(2, nr+1):
             x=input_sh.cell(i,2).value - u_s; x=int(x*1000000000); x/=1000000000; ud.append(x)
-            y=input_sh.cell(i,3).value - v_s; y=int(y*1000000000); y/=1000000000; vd.append👍
+            y=input_sh.cell(i,3).value - v_s; y=int(y*1000000000); y/=1000000000; vd.append(y)
             z=input_sh.cell(i,4).value - w_s; z=int(z*1000000000); z/=1000000000; wd.append(z)
             o=get_octant(x,y,z); ov.append(o)
 
