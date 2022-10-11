@@ -1,14 +1,24 @@
-#Help https://youtu.be/H37f_x4wAC0
-def octant_longest_subsequence_count():
-###Code
+from math import ceil
+import openpyxl
+from openpyxl import Workbook
+from datetime import datetime
 
-from platform import python_version
-ver = python_version()
+start_time = datetime.now()
 
-if ver == "3.8.10":
-    print("Correct Version Installed")
-else:
-    print("Please install 3.8.10. Instruction are present in the GitHub Repo/Webmail. Url: https://pastebin.com/nvibxmjw")
-
-
-octant_longest_subsequence_count()
+def get_octant(x, y, z):
+    if(x>=0 and y>=0 and z>=0):
+        return(1)
+    elif(x>=0 and y>=0 and z<0):
+        return(-1)
+    elif(x<0 and y>=0 and z>=0):
+        return(2)
+    elif(x<0 and y>=0 and z<0):
+        return(-2)
+    elif(x<0 and y<0 and z>=0):
+        return(3)
+    elif(x<0 and y<0 and z<0):
+        return(-3)
+    elif(x>=0 and y<0 and z>=0):
+        return(4)
+    else:
+        return(-4)
