@@ -414,7 +414,7 @@ except:
 
 # saving workbook file
 try:
-    wb.save(r'C:\Users\ASUS\Documents\GitHub\2001CB57_2022\tut02\input_octant_transition_identify.xlsx')
+    wb.save(r'C:\Users\ASUS\Documents\GitHub\2001CB57_2022\tut02\output_octant_transition_identify.xlsx')
 except:
     print("there is error in saving excel file")
 
