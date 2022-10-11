@@ -105,3 +105,49 @@ def octant_longest_subsequence_count():
         # cuurent octant, current octant length
         co=ov[0]; col=1
         lsc[co][0]=1; lsc[co][1]=1
+
+
+        for i in range(1,n+1):
+            if(tov[i]==co):
+                col+=1
+            else:
+                if(col>lsc[co][0]):
+                    lsc[co][0]=col
+                    lsc[co][1]=1
+                elif(col==lsc[co][0]):
+                    lsc[co][1]+=1
+                co=tov[i]
+                col=1
+
+        output_sh.cell(1,13, value='Count')
+        output_sh.cell(1,14, value='Longest Subsequence Length')
+        output_sh.cell(1,15, value='Count')
+        output_sh.cell(2,13, value=1); output_sh.cell(3,13, value=-1)
+        output_sh.cell(4,13, value=2); output_sh.cell(5,13, value=-2)
+        output_sh.cell(6,13, value=3); output_sh.cell(7,13, value=-3)
+        output_sh.cell(8,13, value=4); output_sh.cell(9,13, value=-4)
+
+        output_sh.cell(2,14, value=lsc[1][0]);  output_sh.cell(2,15, value=lsc[1][1])
+        output_sh.cell(3,14, value=lsc[-1][0]); output_sh.cell(3,15, value=lsc[-1][1])
+        output_sh.cell(4,14, value=lsc[2][0]);  output_sh.cell(4,15, value=lsc[2][1])
+        output_sh.cell(5,14, value=lsc[-2][0]); output_sh.cell(5,15, value=lsc[-2][1])
+        output_sh.cell(6,14, value=lsc[3][0]);  output_sh.cell(6,15, value=lsc[3][1])
+        output_sh.cell(7,14, value=lsc[-3][0]); output_sh.cell(7,15, value=lsc[-3][1])
+        output_sh.cell(8,14, value=lsc[4][0]); output_sh.cell(8,15, value=lsc[4][1])
+        output_sh.cell(9,14, value=lsc[-4][0]); output_sh.cell(9,15, value=lsc[-4][1])
+
+        # saving file
+        wb_output.save('output_octant_longest_subsequence.xlsx')
+
+        wb_input.close()
+        wb_output.close()
+
+
+    except:
+        print('File Not Found')
+
+
+octant_longest_subsequence_count()
+
+end_time = datetime.now()
+print('Duration of Program Execution: {}'.format(end_time - start_time))
