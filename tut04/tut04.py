@@ -46,3 +46,54 @@ df.to_excel('output_octant_longest_subsequence_with_range.xlsx')
 df.head()
  #creating the column to store the octant value
 df.insert(10, column="Octant", value="")
+
+
+#using loop
+for i in range(0,x):
+    X= df["U'=U - U_avg"][i]
+    Y= df["V'=V - V_avg"][i]
+    Z= df["W'=W - W_avg"][i]
+    
+    
+    if X>0 and Y>0 and Z>0:
+        print(1)
+        df["Octant"][i] = 1
+    elif X>0 and Y>0 and Z<0:
+        print(-1)
+        df["Octant"][i] =-1
+    elif X<0 and Y>0 and Z>0:
+        print(2)
+        df["Octant"][i] =2
+    elif X<0 and Y>0 and Z<0:
+        print(-2)
+        df["Octant"][i] =-2
+    elif X<0 and Y<0 and Z>0:
+        print(3)
+        df["Octant"][i] =3
+    elif X<0 and Y<0 and Z<0:
+        print(-3)
+        df["Octant"][i] =-3
+    elif X>0 and Y<0 and Z>0:
+        print(4)
+        df["Octant"][i] =4
+    elif X>0 and Y<0 and Z<0:
+        print(-4)
+        df["Octant"][i] =-4
+df.to_excel('output_octant_longest_subsequence_with_range.xlsx')
+df.head()
+
+df.insert(11, column="  ", value="")
+#creating the column to store the count value as column name count_1
+df.insert(12, column="Count_1", value="")
+#creating the column to store the Longest Subsquence Length value
+df.insert(13, column="Longest Subsquence Length", value="")
+#creating the column to store the total count value as column name final_count
+df.insert(14, column="final_count", value="")
+
+ # storing the for count_1(count column name taken as count_1) column in a list
+list=[1,-1, 2, -2, 3,-3, 4,-4]
+y=len(list) #finding the list size
+# printing the values in the count_1
+for i in range (0,y):
+    df.at[i,'Count_1'] = list[i]
+df.head(10)
