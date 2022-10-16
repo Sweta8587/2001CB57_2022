@@ -142,5 +142,48 @@ for i in range(0,y):
     arr_longest_subs_length_count[i]=final_count_no(arr_longest_subs_length[i],list[i])
     df.at[i,'final_count'] = arr_longest_subs_length_count[i]
 
-    
+df.insert(15, column=" b ", value="")
+#creating the column to store the count value as column name count_1
+df.insert(16, column="Count_2", value="")
+#creating the column to store the Longest Subsquence Length value
+df.insert(17, column="Longest Subsquence Length1", value="")
+#creating the column to store the total count value as column name final_count
+df.insert(18, column="final_count1", value="")
+
+# defining a function to print the count , longest sequence length , time ,to ,from 
+def time(c,d):
+        df.at[c,'Count_2'] = list[d]
+        df.at[c,'Longest Subsquence Length1'] = arr_longest_subs_length[d]
+        df.at[c,'final_count1'] = arr_longest_subs_length_count[d]
+        df.at[c+1,'Count_2'] = 'Time'
+        df.at[c+1,'Longest Subsquence Length1'] = 'From'
+        df.at[c+1,'final_count1'] = 'To'
+        
+# defining a function name time_interval to get the time interval of the longest sequence value 
+def time_interval(m,n):
+    g=c+2
+    cp1=0
+    cp1i=0
+    for i in range(0,x):
+            if(df["Octant"][i]==n):
+                cp1i=cp1i+1
+            if(cp1i==m):
+                df.at[g,'Longest Subsquence Length1'] = df["Time"][i-m+1]
+                df.at[g,'final_count1'] = df["Time"][i]
+                g=g+1
+                cp1=cp1+1
+                cp1i=0
+            if(df["Octant"][i]!=n):
+                cp1i=0
+            
+arr=[0]*y # array(arr) for calling the time function for this loop 
+a=[0]*y   # array(arr) for calling the time_interval function for this loop
+c=0
+for i in range(0,y):
+    arr[i]=time(c,i)
+    a[i]=time_interval(arr_longest_subs_length[i],list[i])
+    c=c+arr_longest_subs_length_count[i]+2
+
+df.to_excel('output_octant_longest_subsequence_with_range.xlsx')
+df.head(30)    
 
