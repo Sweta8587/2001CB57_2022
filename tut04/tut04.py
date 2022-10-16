@@ -97,3 +97,20 @@ y=len(list) #finding the list size
 for i in range (0,y):
     df.at[i,'Count_1'] = list[i]
 df.head(10)
+
+# calculating the longest subsequence length value by defining a funtion name longest_sequence with the parameter n(list value)
+def longest_sequence(n):
+    lsc_p1_i=0
+    lsc_p1=0
+    for i in range(0,x):
+        if(df["Octant"][i]==n):
+            lsc_p1=lsc_p1+1
+        if(df["Octant"][i]!=n or i==x-1):
+            if(lsc_p1>lsc_p1_i):
+                lsc_p1_i=lsc_p1
+                lsc_p1=0
+            else:
+                lsc_p1_i=lsc_p1_i
+                lsc_p1=0
+    return lsc_p1_i
+
