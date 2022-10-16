@@ -114,3 +114,33 @@ def longest_sequence(n):
                 lsc_p1=0
     return lsc_p1_i
 
+# creating a array(arr_longest_subs_length)to store the longest sequence length of the count_1 value
+arr_longest_subs_length = [0] * y
+# using a loop in which we are calling the longest_sequence function. with the help of this function we are printing the values directly in the output file
+for i in range(0,y):
+    arr_longest_subs_length[i]=longest_sequence(list[i])
+    df.at[i,'Longest Subsquence Length'] = arr_longest_subs_length[i]
+
+# calculating the count value by defining a funciton name final_count_no with two paramater m and n which is (longest sequence length value, count_1 value)
+def final_count_no(m,n):
+    cp1=0
+    cp1i=0
+    for i in range(0,x):
+        if(df["Octant"][i]==n):
+            cp1i=cp1i+1
+        if(cp1i==m):
+            cp1=cp1+1
+            cp1i=0  
+        if(df["Octant"][i]!=n):
+            cp1i=0
+    return cp1
+
+# creating a array(name arr_longest_subs_length_count) to store the no. of sequence count value(final_count column) 
+arr_longest_subs_length_count = [0] * y
+# using a loop in which we are calling the final_count_no function. with the help of this function we are printing the values directly to the final_count column
+for i in range(0,y):
+    arr_longest_subs_length_count[i]=final_count_no(arr_longest_subs_length[i],list[i])
+    df.at[i,'final_count'] = arr_longest_subs_length_count[i]
+
+    
+
