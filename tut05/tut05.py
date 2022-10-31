@@ -198,3 +198,81 @@ try:
           a=[]
           b=[]
           c=[]
+          for i in range(8) : 
+              c.append(0)
+          a.append(df["+1"][0])
+          a.append(df["-1"][0])
+          a.append(df["+2"][0])
+          a.append(df["-2"][0])
+          a.append(df["+3"][0])
+          a.append(df["-3"][0])
+          a.append(df["+4"][0])
+          a.append(df["-4"][0])
+          b.append(df["+1"][0])
+          b.append(df["-1"][0])
+          b.append(df["+2"][0])
+          b.append(df["-2"][0])
+          b.append(df["+3"][0])
+          b.append(df["-3"][0])
+          b.append(df["+4"][0])
+          b.append(df["-4"][0])
+          b.sort(reverse = True)
+          for i in range(8) : 
+              for j in range(8) : 
+                  if a[j]==b[i] :
+                      c[j]=i+1
+                      j=9
+          df.loc[0,"rank of +1"]=c[0]                 
+          df.loc[0,"rank of -1"]=c[1]                 
+          df.loc[0,"rank of +2"]=c[2]
+          df.loc[0,"rank of -2"]=c[3]
+          df.loc[0,"rank of +3"]=c[4]
+          df.loc[0,"rank of -3"]=c[5]
+          df.loc[0,"rank of +4"]=c[6]
+          df.loc[0,"rank of -4"]=c[7]
+          for v in range(d) :
+           e=[]
+           f=[]
+           g=[]
+           for q in range(8) : 
+            g.append(0)
+           e.append(df["+1"][v+2])
+           e.append(df["-1"][v+2])
+           e.append(df["+2"][v+2])
+           e.append(df["-2"][v+2])
+           e.append(df["+3"][v+2])
+           e.append(df["-3"][v+2])
+           e.append(df["+4"][v+2])
+           e.append(df["-4"][v+2])
+           f.append(df["+1"][v+2])
+           f.append(df["-1"][v+2])
+           f.append(df["+2"][v+2])
+           f.append(df["-2"][v+2])
+           f.append(df["+3"][v+2])
+           f.append(df["-3"][v+2])
+           f.append(df["+4"][v+2])
+           f.append(df["-4"][v+2])
+           f.sort(reverse = True)
+           for i in range(8) : 
+                for j in range(8) : 
+                    if e[j]==f[i] :
+                        g[j]=i+1
+                        j=9
+           df.loc[v+2,"rank of +1"]=g[0]                 
+           df.loc[v+2,"rank of -1"]=g[1]                 
+           df.loc[v+2,"rank of +2"]=g[2]
+           df.loc[v+2,"rank of -2"]=g[3]
+           df.loc[v+2,"rank of +3"]=g[4]
+           df.loc[v+2,"rank of -3"]=g[5]
+           df.loc[v+2,"rank of +4"]=g[6]
+           df.loc[v+2,"rank of -4"]=g[7]
+           w=[]
+           c=0
+           w.append(df["rank of +1"][0])
+           w.append(df["rank of -1"][0])
+           w.append(df["rank of +2"][0])
+           w.append(df["rank of -2"][0])
+           w.append(df["rank of +3"][0])
+           w.append(df["rank of -3"][0])
+           w.append(df["rank of +4"][0])
+           w.append(df["rank of -4"][0])
