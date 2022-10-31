@@ -276,3 +276,84 @@ try:
            w.append(df["rank of -3"][0])
            w.append(df["rank of +4"][0])
            w.append(df["rank of -4"][0])
+           for j in range(8) :
+               if w[j]==1 :
+                   c=j
+                   if(c==0) :
+                      c=1
+                      df.loc[0,"Rank1 Octant ID"]=c
+                      j=8
+                   if(c==1) :
+                      c=-1
+                      df.loc[0,"Rank1 Octant ID"]=c
+                      j=8
+                   if(c==2) :
+                      c=2
+                      df.loc[0,"Rank1 Octant ID"]=c
+                      j=8
+                   if(c==3) :
+                      c=-2
+                      df.loc[0,"Rank1 Octant ID"]=c
+                      j=8
+                   if(c==4) :
+                       c=3
+                       df.loc[0,"Rank1 Octant ID"]=c
+                       j=8
+                   if(c==5) :
+                       c=-3
+                       df.loc[0,"Rank1 Octant ID"]=c
+                       j=8
+                   if(c==6) :
+                       c=4
+                       df.loc[0,"Rank1 Octant ID"]=c
+                       j=8
+                   if(c==7) :
+                      c=-4
+                      df.loc[0,"Rank1 Octant ID"]=c
+                      j=8
+           for i in range(d) :
+              y=[]
+              c=0
+              y.append(df["rank of +1"][i+2])
+              y.append(df["rank of -1"][i+2])
+              y.append(df["rank of +2"][i+2])
+              y.append(df["rank of -2"][i+2])
+              y.append(df["rank of +3"][i+2])
+              y.append(df["rank of -3"][i+2])
+              y.append(df["rank of +4"][i+2])
+              y.append(df["rank of -4"][i+2])
+              for j in range(8) :
+                  if y[j]==1 :
+                      c=j
+                      if(c==0) :
+                         c=1
+                         df.loc[i+2,"Rank1 Octant ID"]=c
+                         j=8
+                      if(c==1) :
+                         c=-1
+                         df.loc[i+2,"Rank1 Octant ID"]=c
+                         j=8
+                      if(c==2) :
+                         c=2
+                         df.loc[i+2,"Rank1 Octant ID"]=c
+                         j=8
+                      if(c==3) :
+                         c=-2
+                         df.loc[i+2,"Rank1 Octant ID"]=c
+                         j=8
+                      if(c==4) :
+                          c=3
+                          df.loc[i+2,"Rank1 Octant ID"]=c
+                          j=8
+                      if(c==5) :
+                          c=-3
+                          df.loc[i+2,"Rank1 Octant ID"]=c
+                          j=8
+                      if(c==6) :
+                          c=4
+                          df.loc[i+2,"Rank1 Octant ID"]=c
+                          j=8
+                      if(c==7) :
+                         c=-4
+                         df.loc[i+2,"Rank1 Octant ID"]=c
+                         j=8
