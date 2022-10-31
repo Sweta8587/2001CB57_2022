@@ -357,3 +357,90 @@ try:
                          c=-4
                          df.loc[i+2,"Rank1 Octant ID"]=c
                          j=8
+          df.loc[d+5,"+1"]="OCTANT ID"
+          k=0
+          o=0
+          n=d+6
+          for i in range(8) :
+              if(i%2==0) :
+                  k=k+1
+                  df.loc[n,"+1"]=k
+                  n=n+1
+              else :
+                  o=o-1
+                  df.loc[n,"+1"]=o
+                  n=n+1
+                  
+          octant_name_id_mapping = {"1": "Internal outward interaction", "-1": "External outward interaction", "2": "External Ejection",
+                                        "-2": "Internal Ejection", "3": "External inward interaction", "-3": "Internal inward interaction", "4": "Internal sweep", "-4": "External sweep"}      
+          df.loc[d+5,"-1"]="Octant Name "
+          df.loc[d+5,"+3"]="Count of Rank 1 Mod Values"
+          k=0
+          o=0
+          n=d+6
+          for i in range(8) :
+              if(i%2==0) :
+                  k=k+1
+                  df.loc[n,"-1"]=octant_name_id_mapping[str(k)]
+                  n=n+1
+              else :
+                  o=o-1
+                  df.loc[n,"-1"]=octant_name_id_mapping[str(o)]
+                  n=n+1
+          df.loc[0,"Rank1 Octant Name"]=octant_name_id_mapping[str(int(df.loc[0,"Rank1 Octant ID"]))]
+          for i in range(d) :
+              df.loc[i+2,"Rank1 Octant Name"]=octant_name_id_mapping[str(int(df.loc[i+2,"Rank1 Octant ID"]))]
+          p=df['Rank1 Octant ID'].value_counts()
+          h=[]
+          for i in range(d) :
+              h.append(int(df["Rank1 Octant ID"][i+2]))
+          k=0
+          for i in range(d) :
+              if(h[i]==1)  :
+                  k=k+1
+          df.loc[d+6,"+3"]=k
+          k=0
+          for i in range(d) :
+              if(h[i]==-1)  :
+                  k=k+1
+          df.loc[d+7,"+3"]=k
+          k=0
+          for i in range(d) :
+              if(h[i]==2)  :
+                  k=k+1
+          df.loc[d+8,"+3"]=k
+          k=0
+          for i in range(d) :
+              if(h[i]==-2)  :
+                  k=k+1
+          df.loc[d+9,"+3"]=k
+          k=0
+          for i in range(d) :
+              if(h[i]==3)  :
+                  k=k+1
+          df.loc[d+10,"+3"]=k
+          k=0
+          for i in range(d) :
+              if(h[i]==-3)  :
+                  k=k+1
+          df.loc[d+11,"+3"]=k
+          k=0
+          for i in range(d) :
+              if(h[i]==4)  :
+                  k=k+1
+          df.loc[d+12,"+3"]=k
+          k=0
+          for i in range(d) :
+              if(h[i]==-4)  :
+                  k=k+1
+          df.loc[d+13,"+3"]=k
+        
+          df.to_excel('octant_output_ranking_excel.xlsx')
+        except:
+             print("please enter mod value greater than 0")    
+     except :
+      print("the input file does not exists/or any error")    
+    mod=5000 
+    octant_range_names(mod)  
+except:
+    print("install pandas,math and import it.")
