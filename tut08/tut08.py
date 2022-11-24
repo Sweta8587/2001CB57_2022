@@ -384,3 +384,41 @@ for i in range(lx):
   mybowlers2.loc[bowlername,'O'] = (mybowlers2.loc[bowlername,'B']//6)+((mybowlers2.loc[bowlername,'B']%6)*0.1)
 
   mybowlers2.loc[bowlername,'EC'] = mybowlers2.loc[bowlername,'R']/(mybowlers2.loc[bowlername,'B']/6)
+
+
+extra2 =lb + b2  + wide2
+
+print('SCORECARD')
+print(mybatsman2)
+
+print('\nExtras\t\t'+ str(extra2) + '(b ' + str(b2) +', lb '+ str(lb) +', w '+ str(wide2) +', nb '+ str(noball2) + ')')
+print('\nTotal\t\t'+ str(score2) + ' ('+ str(wickets2)+ ' wkts, '+ str(mybowlers2['O'].sum()) +' Ov)\n' )
+print('fall of wickets2\n')
+print(fall2)
+print('\n')
+print(mybowlers2.iloc[:,:-1])
+
+# mybatsman2.to_csv('Scorecard1.txt')
+with open('Scorecard.txt', 'a') as f:
+    f.write('\n')
+    f.write('India innings')
+    f.write('\n')
+    dfAsString = mybatsman2.to_string(header=True,index=True)
+    f.write(dfAsString)
+    f.write('\n')
+    f.write('\nExtras\t\t'+ str(extra2) + '(b ' + str(b2) +', lb '+ str(lb) +', w '+ str(wide2) +', nb '+ str(noball2) + ')')
+    f.write('\n')
+    f.write('\nTotal\t\t'+ str(score2) + ' ('+ str(wickets2)+ ' wkts, '+ str(mybowlers2['O'].sum()) +' Ov)\n')
+    f.write('\n')
+    f.write('Did not bat         Bhuvneshwar Kumar , Avesh Khan , Yuzvendra Chahal , Arshdeep Singh')
+    f.write('\n')
+    f.write('\n')
+    f.write('fall of wickets')
+    f.write('\n')
+    f.write(fall2)
+    f.write('\n')
+    f.write('\n')
+    f.write('bowler')
+    f.write('\n')
+    dfAsSt = mybowlers2.to_string(header=True,index=True)
+    f.write(dfAsSt)
