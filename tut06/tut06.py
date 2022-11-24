@@ -121,3 +121,118 @@ else:
         attach_file=MIMEApplication(open('Output/'+attach_file_name, 'rb').read())
         attach_file.add_header('Content-Disposition','attachment; filename="%s"' %attach_file_name)
         message.attach(attach_file)
+
+        try:
+            session = smtplib.SMTP('smtp.gmail.com', 587) #use gmail with port
+            session.starttls() #enable security
+            session.login(sender_address, sender_pass) #login with mail_id and password
+            text = message.as_string()
+            session.sendmail(sender_address, receiver_address, text)
+            session.quit()
+            print("successfully sent the mail")
+
+        except:
+            print('Failed to send the email!')
+   
+    def attendance_report():
+        from platform import python_version
+        ver = python_version()
+   
+        if ver == "3.8.10":
+            print("Correct Version Installed")
+        else:
+            print("Please install 3.8.10. Instruction are present in the GitHub Repo/Webmail. Url: https://pastebin.com/nvibxmjw")
+       
+        d = {}
+        try:
+            attendance = pd.read_csv('input_attendance.csv')
+            students = pd.read_csv('input_registered_students.csv')
+        except :
+            print("the input file does not exist at desired location")
+       
+        else:              
+            attendance = preprocess(attendance)
+            for index in students.index:
+                d[students['Roll No'][index]] = {'Name': students['Name'][index], 'Date': getAllClassDates()}
+
+            for index in attendance.index:
+                ts = attendance['Timestamp'][index]
+                name, roll = getNameAndRoll(attendance['Attendance'][index])
+                date = getDateFromTs(ts)
+                valid = getValidity(getTimestampValue(ts))
+                old_value = (0, 0)
+                if date in d[roll]:
+                    old_value = d[roll][date]
+           
+                if valid:
+                    d[roll][date] = (old_value[0] + 1, old_value[1])
+                else:
+                    d[roll][date] = (old_value[0], old_value[1] + 1)
+           
+           
+            out3_keys = ['Roll', 'Name'] + classDates + ['Actual Lecture Taken', 'Total Real', '% Percentage']
+            out3 = {}
+           
+            out4 = {}
+           
+            for k in out3_keys:
+                out3[k] = []
+                               
+            for roll, v in d.items():
+                total = 0
+                valid = 0
+                invalid = 0
+                duplicates = 0
+                absent = 0
+               
+                out2 = v['Date']
+                out3['Roll'].append(roll)
+                out3['Name'].append(v['Name'])
+                out3['Actual Lecture Taken'].append(len(classDates))
+                out4[roll] = getAllClassDuplicates()
+               
+                for index in classDates:
+                    x = 0
+                    y = 0
+                   
+                    if(index in v):
+                        x = v[index][0]
+                        y = v[index][1]
+                   
+                    if(x >= 1):
+                        total += 1
+       
+                    if (x + y > 1):
+                        duplicates += x + y
+                   
+                    if (x == 0):
+                        absent += 1
+                       
+                    valid += x
+                    invalid += y
+                   
+                    if(x >= 1):
+                        out2[index] = 'P'
+                    out3[index].append(out2[index])
+                   
+                    if(x + y > 1):
+                        out4[roll][index] = x + y
+                   
+                out1 = {'Roll': roll,
+                       'Name': v['Name'],
+                       'Total Attendance Count': valid + invalid,
+                       'Real': total,
+                       'Duplicate': duplicates,
+                       'Invalid': invalid,
+                       'Absent': absent
+                       }
+                out3['Total Real'].append(total)
+                out3['% Percentage'].append(round(total/len(classDates)*100, 2))
+               
+                df1 = pd.DataFrame(out1.items())
+                df2 = pd.DataFrame(out2.items(), columns = ['Date', 'Attendance'])
+               
+                path = "Output"
+                isOutputDirectoryExist = os.path.exists(path)
+                if not isOutputDirectoryExist:
+                    os.makedirs(path)
