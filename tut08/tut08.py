@@ -164,4 +164,109 @@ for i in range(lx): #iterating through every ball
             content2 = content[0].split('by')
             mybatsman.loc[batsname,'status'] = 'c ' + content2[1] + ' b ' + bowlername #updating status of the batsman
             mybowlers.loc[bowlername,'W'] = mybowlers.loc[bowlername,'W'] + 1
-     
+         
+  mybatsman.loc[batsname,'SR'] = int((mybatsman.loc[batsname,'R'] / mybatsman.loc[batsname,'B']) * 100) #updating strike rate of the batsman
+  mybowlers.loc[bowlername,'O'] = (mybowlers.loc[bowlername,'B']//6)+((mybowlers.loc[bowlername,'B']%6)*0.1)#overs bowled by the bowler
+
+  mybowlers.loc[bowlername,'EC'] = mybowlers.loc[bowlername,'R']/(mybowlers.loc[bowlername,'B']/6)#economy of the bowler
+
+
+extra =lb + b  + wide #calculating total extra's of the innings
+
+print('SCORECARD')
+print(mybatsman)
+print('\nExtras\t\t'+ str(extra) + '(b ' + str(b) +', lb '+ str(lb) +', w '+ str(wide) +', nb '+ str(noball) + ')')
+print('\nTotal\t\t'+ str(score) + ' ('+ str(wickets)+ ' wkts, '+ str(mybowlers['O'].sum()) +' Ov)\n' )
+print('fall of wickets\n')
+print(fall)
+print('\n')
+print(mybowlers.iloc[:,:-1])
+
+with open('Scorecard.txt', 'a') as f: #writing the scorecard of the first innings into scorecard.txt file
+    f.write('SCORECARD')
+    f.write('\n')
+    f.write('Pakistan innings')
+    f.write('\n')
+    dfAsString = mybatsman.to_string(header=True,index=True)
+    f.write(dfAsString)
+    f.write('\nExtras\t\t'+ str(extra) + '(b ' + str(b) +', lb '+ str(lb) +', w '+ str(wide) +', nb '+ str(noball) + ')')
+    f.write('\n')
+    f.write('\nTotal\t\t'+ str(score) + ' ('+ str(wickets)+ ' wkts, '+ str(mybowlers['O'].sum()) +' Ov)\n')
+    f.write('\n')
+    f.write('fall of wickets')
+    f.write('\n')
+    f.write(fall)
+    f.write('\n')
+    f.write('bowler')
+    f.write('\n')
+    dfAsSt = mybowlers.to_string(header=True,index=True)
+    f.write(dfAsSt)
+    f.write('\n')
+
+         ####  SIMILARLY FOR THE SECOND INNINGS  #### 
+
+         
+text2=open("india_inns2.txt","r").read() #reading 2nd innings input file into 'text2'
+
+sent2=[]
+
+for row in text2.split("\n"):
+	sent2.append(row)      
+
+ball=re.findall(r'([0-9][.][1-6]|[1-2][0-9][.][1-6])',text)
+
+
+while("" in sent2):
+    sent2.remove("")
+
+
+for i in range(61):
+
+		sent2[i]=sent2[i][:3]+","+sent2[i][3:]
+
+for i in range(61,124):
+	
+		sent2[i]=sent2[i][:4]+","+sent2[i][4:]
+
+
+
+l=len(sent2)
+
+line2=[]
+
+list12=[]
+
+for i in range(l):
+	list12=sent2[i].split(',')
+	line2.append(list12)
+
+lx=len(line2)
+batsman2=[]
+bowlers2=[]
+cnt=0
+
+for i in range(lx):
+	players2=line2[i][1].split('to')	
+	# print(players)
+	# print("\n")
+	bowlers2.append(players2[0])
+	batsman2.append(players2[1])
+batsman2=list(dict.fromkeys(batsman2))
+bowlers2=list(dict.fromkeys(bowlers2))
+
+mybatsman2=pd.DataFrame(0,batsman2,['status','R','B','4s','6s','SR'])
+
+mybatsman2['status']='not out'
+
+mybowlers2=pd.DataFrame(0,bowlers2,['O','M','R','W','NB','WD','EC','B'])
+
+extra2=0
+wide2=0
+score2=0
+wickets2=0
+noball2=0
+b2=0
+lb=0
+fall2=''
+
+content3=[]
