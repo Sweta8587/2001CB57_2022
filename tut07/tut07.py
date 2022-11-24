@@ -108,3 +108,101 @@ def octant_analysis(mod=5000):
                                          myworkbook.cell(row=i+3,column=10).value=round(df['W'][i]-w_avg,3)
                                          myworkbook.cell(row=i+3,column=11).value=find_octant(df['U'][i]-u_avg,df['V'][i]-v_avg,df['W'][i]-w_avg)
                                          octant.append(find_octant(df['U'][i]-u_avg,df['V'][i]-v_avg,df['W'][i]-w_avg))
+                           
+                           def octant_range_names(mod=5000):
+                                         octant_name_id_mapping = {"1":"Internal outward interaction", "-1":"External outward interaction", "2":"External Ejection", "-2":"Internal Ejection", "3":"External inward interaction", "-3":"Internal inward interaction", "4":"Internal sweep", "-4":"External sweep"}
+                                         dic={}                                                          # creating dictionary for mapping 
+                                         my_dic={}                                                      # Creating dictionary with opposite key value pair than 'dic'
+                                         
+                                         for i in range(0,4):                                            # dic[1]=0,dic[-1]=-1,...
+                                                       dic[i+1]=2*i+1-1                                            # my_dic[0]=1,my_dic[1]=-1,...
+                                                       dic[-(i+1)]=2*(i+1)-1
+                                                       my_dic[2*i+1-1]=i+1
+                                                       my_dic[2*(i+1)-1]=-(i+1)
+ 
+                                         def find_rank_of_list(lst):                                     # Function to find the rank list from count values of all octants
+                                                       temp_lst=lst.copy()
+                                                       temp_lst.sort(reverse=True)
+                                                       res=[]
+ 
+                                                       for i in lst:
+                                                                    for j in range(0,8):
+                                                                                  if(i==temp_lst[j]):
+                                                                                                res.append(j+1)
+                                                                                                break
+                                                       return res                                                  # Returning the ranked list
+                                         
+                                         def find_1st_rank(lst):                                         # Finding the octant which has rank 1 in the given rank list
+                                                       for i in range(8):
+                                                                    if(lst[i]==1):
+                                                                                  return my_dic[i]
+ 
+                                         def count_rank1(lst,x):                                         # Finding the count of rank 1 in the rank 1 mod values of octant x
+                                                       sum=0
+                                                       for i in lst:
+                                                                    if(x==i):
+                                                                                  sum+=1
+                                                       return sum                                                  # Return the count
+                                         
+                                         my_matr=[]                                                  # Matrix to store rank list for different mod values
+                                         rank1_list=[]                                                   # List to store the octants which have rank 1 in different mod ranges and overall
+                                         myworkbook=wb.active
+                                         myworkbook['M4']='Mod '+str(mod)                                           # Putting the string 'User Input' at its specified place
+ 
+                                         matrix=[]                                                       # 2-d matrix for storing octants within ranges
+                                         count=[0]*9                                                     # Creating a list for storing elements of 9 columns
+ 
+                                         count[0]='Octant ID'                                            # Storing header list in 'count' list
+ 
+                                         for i in range(0,4):
+                                                       count[2*i+1]=(i+1)
+                                                       count[2*(i+1)]=-(i+1)
+                                         matrix.append(count)                                            # Appending header list in matrix
+                                         for i in range(13,22):                                          # Writing header list in worksheet
+                                                       myworkbook.cell(row=3,column=i+1).value=count[i-13]
+                                                       myworkbook.cell(row=3,column=i+1).border=thin_border
+                                                       if(i>13):
+                                                                    myworkbook.cell(row=3,column=i+9).value='Rank Octant '+str(count[i-13])
+                                                                    myworkbook.cell(row=3,column=i+9).border=thin_border
+                                         myworkbook.cell(row=3,column=31).value='Rank1 Octant ID'
+                                         myworkbook.cell(row=3,column=32).value='Rank1 Octant Name'
+                                         myworkbook.cell(row=3,column=31).border=thin_border
+                                         myworkbook.cell(row=3,column=32).border=thin_border
+                                         count=[0]*9                                                     # Resetting values in list 'count'
+                           
+                                         for i in octant:                                                # Finding total count of values in different octants
+                                                       if(i==1):
+                                                                    count[1]=count[1]+1
+                                                       elif(i==-1):
+                                                                    count[2]=count[2]+1
+                                                       elif(i==2):
+                                                                    count[3]=count[3]+1
+                                                       elif(i==-2):
+                                                                    count[4]=count[4]+1
+                                                       elif(i==3):
+                                                                    count[5]=count[5]+1
+                                                       elif(i==-3):
+                                                                    count[6]=count[6]+1
+                                                       elif(i==4):
+                                                                    count[7]=count[7]+1
+                                                       elif(i==-4):
+                                                                    count[8]=count[8]+1
+                                         yellow = "00FFFF00"
+                                         count[0]='Overall Count'                                        # Creating overall count row
+                                         matrix.append(count)                                           
+                                         for i in range(13,22):                                          # Writing overall count in worksheet
+                                                       myworkbook.cell(row=4,column=i+1).value=count[i-13]
+                                                       myworkbook.cell(row=4,column=i+1).border=thin_border
+                                         count.pop(0)                                                    # Removing the header from list
+                                         rank=find_rank_of_list(count)                                   # Find the rank list 
+                                         rank1_list.append(find_1st_rank(rank))                          # Finding the rank 1 octant and appending in rank1_list
+                                         my_matr.append(rank)                                        # Appending rank list in the matrix
+                                         for i in range(8):                                              # Writing overall count in worksheet
+                                                       myworkbook.cell(row=4,column=23+i).value=my_matr[0][i]
+                                                       myworkbook.cell(row=4,column=23+i).border=thin_border
+                                                       if(my_matr[0][i]==1):
+                                                                     myworkbook.cell(row=4,column=23+i).fill=PatternFill(start_color=yellow,end_color=yellow,fill_type="solid")
+                                         myworkbook.cell(row=4,column=31).value=rank1_list[0]
+                                         myworkbook.cell(row=4,column=32).value=octant_name_id_mapping[str(rank1_list[0])]
+                                         myworkbook.cell(row=4,column=31).border=thin_border
+                                         myworkbook.cell(row=4,column=32).border=thin_border
