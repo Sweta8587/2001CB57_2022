@@ -270,3 +270,117 @@ lb=0
 fall2=''
 
 content3=[]
+
+
+for i in range(lx):
+  ball_no=line2[i][0]
+  players=line2[i][1].split('to')
+  batsname=players[1]
+  bowlername=players[0]
+
+  line2[i][2]=line2[i][2].lower()
+  if line2[i][2]==" wide":
+   wide2=wide2+1
+   score2=score2+1
+   mybowlers2.loc[bowlername,'R']=mybowlers2.loc[bowlername,'R']+1
+   mybowlers2.loc[bowlername,'WD']=mybowlers2.loc[bowlername,'WD']+1
+  elif line2[i][2]==' 3 wides':
+   wide2=wide2+3
+   score2=score2+3
+   mybowlers2.loc[bowlername,'R']=mybowlers2.loc[bowlername,'R']+3
+   mybowlers2.loc[bowlername,'WD']=mybowlers2.loc[bowlername,'WD']+3
+  elif line2[i][2]==' 2 wides':
+   wide2=wide2+2
+   score2=score2+2
+   mybowlers2.loc[bowlername,'R']=mybowlers2.loc[bowlername,'R']+2
+   mybowlers2.loc[bowlername,'WD']=mybowlers2.loc[bowlername,'WD']+2
+  elif line2[i][2]==" four" or line2[i][2]==' 4' or line2[i][2]==' 4 runs':
+   mybatsman2.loc[batsname,'R']=mybatsman2.loc[batsname,'R']+4
+   mybatsman2.loc[batsname,'4s']=mybatsman2.loc[batsname,'4s']+1
+   mybatsman2.loc[batsname,'B']=mybatsman2.loc[batsname,'B']+1
+   mybowlers2.loc[bowlername,'B']=mybowlers2.loc[bowlername,'B']+1
+   mybowlers2.loc[bowlername,'R']=mybowlers2.loc[bowlername,'R']+4
+   score2=score2+4
+
+  elif line2[i][2] == ' six' or line2[i][2] == ' 6' or line2[i][2] == ' 6 runs':
+   mybatsman2.loc[batsname,'6s'] = mybatsman2.loc[batsname,'6s'] + 1
+   mybatsman2.loc[batsname,'R'] = mybatsman2.loc[batsname,'R'] + 6
+   mybatsman2.loc[batsname,'B'] = mybatsman2.loc[batsname,'B'] + 1
+
+   mybowlers2.loc[bowlername,'B'] = mybowlers2.loc[bowlername,'B'] + 1
+   mybowlers2.loc[bowlername,'R'] = mybowlers2.loc[bowlername,'R'] + 6
+   score2 = score2 +6
+   
+  elif line2[i][2] == ' 1 run' or line2[i][2] == ' 1':
+        mybatsman2.loc[batsname,'R'] = mybatsman2.loc[batsname,'R'] + 1   
+        mybatsman2.loc[batsname,'B'] = mybatsman2.loc[batsname,'B'] + 1
+        
+        mybowlers2.loc[bowlername,'B'] = mybowlers2.loc[bowlername,'B'] + 1
+        mybowlers2.loc[bowlername,'R'] = mybowlers2.loc[bowlername,'R'] + 1
+        score2 = score2 +1
+        
+    
+  elif line2[i][2] == ' 2 runs' or line2[i][2] == ' 2 run' or line2[i][2] == ' 2':
+        mybatsman2.loc[batsname,'R'] = mybatsman2.loc[batsname,'R'] + 2 
+        mybatsman2.loc[batsname,'B'] = mybatsman2.loc[batsname,'B'] + 1
+        
+        mybowlers2.loc[bowlername,'B'] = mybowlers2.loc[bowlername,'B'] + 1
+        mybowlers2.loc[bowlername,'R'] = mybowlers2.loc[bowlername,'R'] + 2
+        score2 = score2 +2
+    
+   
+  elif line2[i][2] == ' 3 runs' or line2[i][2] == ' 3 run' or line2[i][2] == ' 3':
+        mybatsman2.loc[batsname,'R'] = mybatsman2.loc[batsname,'R'] + 3
+        mybatsman2.loc[batsname,'B'] = mybatsman2.loc[batsname,'B'] + 1
+        
+        mybowlers2.loc[bowlername,'B'] = mybowlers2.loc[bowlername,'B'] + 1
+        mybowlers2.loc[bowlername,'R'] = mybowlers2.loc[bowlername,'R'] + 3
+        score2 = score2 +3
+  elif line2[i][2] == ' no run' or line2[i][2] == ' no':
+        mybatsman2.loc[batsname,'B'] = mybatsman2.loc[batsname,'B'] + 1 
+        mybowlers2.loc[bowlername,'B'] = mybowlers2.loc[bowlername,'B'] + 1
+    
+   
+  elif line2[i][2] == ' leg byes' :
+       
+                        
+        if line2[i][3] == ' four' or line2[i][3] == ' FOUR' or line2[i][3] == ' 4 runs':
+            lb = lb + 4
+            score2 = score2 +4
+            mybowlers2.loc[bowlername,'B'] = mybowlers2.loc[bowlername,'B'] + 1
+        if line2[i][3] == ' 1 run' or line2[i][3] == ' 1':
+            lb = lb + 1
+            score2 = score2 +1
+            mybowlers2.loc[bowlername,'B'] = mybowlers2.loc[bowlername,'B'] + 1
+  elif line2[i][2] == ' byes':
+        mybatsman2.loc[batsname,'B'] = mybatsman2.loc[batsname,'B'] + 1
+        mybowlers2.loc[bowlername,'B'] = mybowlers2.loc[bowlername,'B'] + 1
+                
+        if line2[i][3] == ' 1 run' or line2[i][3] == ' 1':
+            b2 = b2 + 1
+            score2 = score2 +1
+  else:
+        mybatsman2.loc[batsname,'B'] = mybatsman2.loc[batsname,'B'] + 1
+        mybowlers2.loc[bowlername,'B'] = mybowlers2.loc[bowlername,'B'] + 1
+        wickets2 = wickets2 +1
+        add = str(score2) + '-' + str(wickets2) + '('+ batsname + ',' + ball_no + ')'
+        fall2=fall2+add
+        fall2=fall2+" "
+        
+        content3 = line2[i][2].split('!')
+        
+        if content3[0] == ' out bowled':
+            mybatsman2.loc[batsname,'status'] = 'b ' + bowlername 
+            mybowlers2.loc[bowlername,'W'] = mybowlers2.loc[bowlername,'W'] + 1
+        elif content3[0]==' out lbw':
+         mybatsman2.loc[batsname,'status'] = 'lbw ' + bowlername 
+         mybowlers2.loc[bowlername,'W'] = mybowlers2.loc[bowlername,'W'] + 1
+        else:
+            content4 = content3[0].split('by')
+            mybatsman2.loc[batsname,'status'] = 'c ' + content4[1] + ' b ' + bowlername 
+            mybowlers2.loc[bowlername,'W'] = mybowlers2.loc[bowlername,'W'] + 1
+     
+  mybatsman2.loc[batsname,'SR'] = int((mybatsman2.loc[batsname,'R'] / mybatsman2.loc[batsname,'B']) * 100)
+  mybowlers2.loc[bowlername,'O'] = (mybowlers2.loc[bowlername,'B']//6)+((mybowlers2.loc[bowlername,'B']%6)*0.1)
+
+  mybowlers2.loc[bowlername,'EC'] = mybowlers2.loc[bowlername,'R']/(mybowlers2.loc[bowlername,'B']/6)
