@@ -236,3 +236,35 @@ else:
                 isOutputDirectoryExist = os.path.exists(path)
                 if not isOutputDirectoryExist:
                     os.makedirs(path)
+                df1 = df1.T
+                df1.to_excel(r'Output\%s.xlsx'%roll)
+               
+                writer = pd.ExcelWriter(r'Output\%s.xlsx'%roll,engine='xlsxwriter')
+                workbook=writer.book
+                worksheet=workbook.add_worksheet(roll)
+                writer.sheets[roll] = worksheet
+       
+                df1.to_excel(writer,sheet_name=roll,startrow=0 , startcol=0, header=None,index=False)
+                df2.to_excel(writer,sheet_name=roll,startrow=df1.shape[0] + 2, startcol=0, index=False)
+                writer.save()
+           
+            df3 = pd.DataFrame(out3, columns = out3_keys)
+            df3.to_csv(r'Output\attendance_report_consolidated.csv')
+           
+            df4 = pd.DataFrame(out4)
+            df4 = df4.T
+            df4.to_csv(r'Output\attendance_report_duplicate.csv')
+           
+            user_input = input('Do you want to send email with attendance report (Y/N): ')
+            if user_input.lower() == 'y':
+                email = input('Please enter sender gmail account: ')
+                password = input('Please enter sender app password (For knowing how to generate app password: https://stackoverflow.com/a/72553362/15394384): ')
+                send_email(email, password, "cs3842022@gmail.com")
+            elif user_input.lower() != 'n':
+                print('Wrong input!')
+           
+    attendance_report()
+
+#This shall be the last lines of the code.
+end_time = datetime.now()
+print('Duration of Program Execution: {}'.format(end_time - start_time))
