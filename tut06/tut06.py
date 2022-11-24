@@ -95,3 +95,29 @@ else:
             classes[single_date] = 0
         return classes
    
+    def send_email(user, pwd, recipient):
+        import smtplib
+        from email.mime.multipart import MIMEMultipart
+        from email.mime.text import MIMEText
+        from email.mime.application import MIMEApplication
+
+        mail_content = '''
+        Dear students,
+        Please find the attached attendance report for CS384 class.
+        Thank You
+        '''
+
+        sender_address = user
+        sender_pass = pwd
+        receiver_address = recipient
+        message = MIMEMultipart()
+        message['From'] = sender_address
+        message['To'] = receiver_address
+        message['Subject'] = 'Attendance report for 2020 batch: CS384'
+       
+        message.attach(MIMEText(mail_content, 'plain'))
+        attach_file_name = 'attendance_report_consolidated.csv'
+       
+        attach_file=MIMEApplication(open('Output/'+attach_file_name, 'rb').read())
+        attach_file.add_header('Content-Disposition','attachment; filename="%s"' %attach_file_name)
+        message.attach(attach_file)
