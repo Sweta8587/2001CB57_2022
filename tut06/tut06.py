@@ -57,3 +57,41 @@ else:
         classDates = list(classes)
         classDates.sort(key=lambda date: datetime.strptime(date, "%d-%m-%Y"))
         return df
+    def getNameAndRoll(student):
+        roll = student[:8]
+        name = student[9:]
+        return name, roll
+   
+    # return 1 for valid and 0 for invalid
+    def getValidity(ts):
+        time = ts.time()
+        hour = time.hour
+        minute = time.minute
+        dayOfWeek = ts.weekday()
+        if(dayOfWeek in [0, 3] and (hour == 14 or (hour == 15 and minute == 0))):
+            return 1
+        return 0
+   
+    def getDateFromTs(ts):
+        return ts[:10]
+   
+    def getTimestampValue(ts_string):
+        format_date = datetime.strptime(ts_string, '%d-%m-%Y %H:%M')
+        return format_date
+   
+    def daterange(start_date, end_date):
+        for n in range(int((end_date - start_date).days)):
+            yield start_date + timedelta(n)
+           
+    def getAllClassDates():
+        classes = {}
+        for single_date in classDates:
+            classes[single_date] = 'A'
+        return classes
+   
+    def getAllClassDuplicates():
+        classes = {}
+        for single_date in classDates:
+            classes[single_date] = 0
+        return classes
+   
