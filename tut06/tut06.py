@@ -24,6 +24,7 @@
 # end_time = datetime.now()
 # print('Duration of Program Execution: {}'.format(end_time - start_time))
 
+
 from datetime import datetime
 start_time = datetime.now()
 
@@ -81,7 +82,7 @@ else:
    
     def daterange(start_date, end_date):
         for n in range(int((end_date - start_date).days)):
-            yield start_date + timedelta(n)
+            yield start_date + timedelta
            
     def getAllClassDates():
         classes = {}
@@ -116,7 +117,7 @@ else:
         message['Subject'] = 'Attendance report for 2020 batch: CS384'
        
         message.attach(MIMEText(mail_content, 'plain'))
-        attach_file_name = 'attendance_report_consolidated.csv'
+        attach_file_name = r'C:\Users\ASUS\Documents\GitHub\2001CB57_2022\tut06\output\attendance_report_consoludated.csv'
        
         attach_file=MIMEApplication(open('Output/'+attach_file_name, 'rb').read())
         attach_file.add_header('Content-Disposition','attachment; filename="%s"' %attach_file_name)
@@ -145,8 +146,8 @@ else:
        
         d = {}
         try:
-            attendance = pd.read_csv('input_attendance.csv')
-            students = pd.read_csv('input_registered_students.csv')
+            attendance = pd.read_csv(r'C:\Users\ASUS\Documents\GitHub\2001CB57_2022\tut06\input_attendance.csv')
+            students = pd.read_csv(r'C:\Users\ASUS\Documents\GitHub\2001CB57_2022\tut06\input_registered_students.csv')
         except :
             print("the input file does not exist at desired location")
        
@@ -232,14 +233,14 @@ else:
                 df1 = pd.DataFrame(out1.items())
                 df2 = pd.DataFrame(out2.items(), columns = ['Date', 'Attendance'])
                
-                path = "Output"
+                path = r"C:\Users\ASUS\Documents\GitHub\2001CB57_2022\tut06\output"
                 isOutputDirectoryExist = os.path.exists(path)
                 if not isOutputDirectoryExist:
                     os.makedirs(path)
                 df1 = df1.T
-                df1.to_excel(r'Output\%s.xlsx'%roll)
+                df1.to_excel(r'C:\Users\ASUS\Documents\GitHub\2001CB57_2022\tut06\output\%s.xlsx'%roll)
                
-                writer = pd.ExcelWriter(r'Output\%s.xlsx'%roll,engine='xlsxwriter')
+                writer = pd.ExcelWriter(r'C:\Users\ASUS\Documents\GitHub\2001CB57_2022\tut06\output\%s.xlsx'%roll,engine='xlsxwriter')
                 workbook=writer.book
                 worksheet=workbook.add_worksheet(roll)
                 writer.sheets[roll] = worksheet
@@ -249,11 +250,11 @@ else:
                 writer.save()
            
             df3 = pd.DataFrame(out3, columns = out3_keys)
-            df3.to_csv(r'Output\attendance_report_consolidated.csv')
+            df3.to_csv(r'C:\Users\ASUS\Documents\GitHub\2001CB57_2022\tut06\output\attendance_report_consoludated.csv')
            
             df4 = pd.DataFrame(out4)
             df4 = df4.T
-            df4.to_csv(r'Output\attendance_report_duplicate.csv')
+            df4.to_csv(r'C:\Users\ASUS\Documents\GitHub\2001CB57_2022\tut06\output\attendance_report_duplicate.csv')
            
             user_input = input('Do you want to send email with attendance report (Y/N): ')
             if user_input.lower() == 'y':
