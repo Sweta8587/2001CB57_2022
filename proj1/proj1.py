@@ -1,7 +1,7 @@
-#imports
+from datetime import datetime
+start_time = datetime.now()
 import socket 
 import threading
-
 
 class ChatServer:
     
@@ -9,7 +9,7 @@ class ChatServer:
 
     last_received_message = ""
 
-    def __init__(self):
+    def _init_(self):
         self.server_socket = None
         self.create_listening_server()
     #listen for incoming connection
@@ -53,15 +53,24 @@ class ChatServer:
         if client not in self.clients_list:
             self.clients_list.append(client)
 
+def proj_chat_tool():
 
-if __name__ == "__main__":
-    ChatServer()
+	from platform import python_version
+	ver = python_version()
 
+	if ver == "3.8.10":
+		print("Correct Version Installed")
+	else:
+		print("Please install 3.8.10. Instruction are present in the GitHub Repo/Webmail. Url: https://pastebin.com/nvibxmjw")
+	
+	ChatServer()
 
-
-
-
+proj_chat_tool()
 
 #This shall be the last lines of the code.
 end_time = datetime.now()
 print('Duration of Program Execution: {}'.format(end_time - start_time))
+
+
+
+
